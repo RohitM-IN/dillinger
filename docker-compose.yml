@@ -4,8 +4,17 @@ services:
     build: .
     container_name: dillinger
     image: joemccann/dillinger
-    ports:
-      - "9000:9000"
+#    ports:
+#      - "9000:9000"
     environment:
       - "BIND_ADDRESS=0.0.0.0"
       - "PORT=9000"
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp=unconfined
+
+networks:
+  default:
+    name: nginxproxymanager
+    external: true
